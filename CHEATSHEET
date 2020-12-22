@@ -1,0 +1,57 @@
+
+# docker ps       //check runing processes
+# docker ps -a    //check all containers (running and stoped)
+
+# docker build .           //build the image
+# docker run -p 3000:3000 //publish to local //attached mode
+# docker start              // Detached mode
+# docker stop container_name/container_id
+
+
+
+
+As an additional quick side-note: For all docker commands where an ID can be used, you don't always have to copy / write out the full id.
+You can also just use the first (few) character(s) - just enough to have a unique identifier.
+So instead of
+
+# docker run abcdefg
+you could also run
+# docker run abc
+or, if there's no other image ID starting with "a", you could even run just:
+# docker run a
+
+
+# process-
+
+1. docker build -t fav-node .
+2. docker run --name favs -d --rm -p 3000:3000 fav-node
+3. docker run mongo --name mongodb -d
+4. 
+
+#   create a network 
+    docker network create fav-net
+
+#   running mongodb inside that network 
+    docker run -d --name mongodb --network fav-net mongo
+
+#   check all networks
+    docker network ls
+
+#   rebuild the docker img of node project
+#   run the docker image inside that network
+    docker run --name fav-node --network fav-net --rm fav-node (publish not required)
+
+#   remove docker images
+    docker prune -a
+
+#   remove docker containers
+    docker container prune
+
+#   running a react projet inside container, make sure to add the -it flag (Interractive mode)
+    docker run --name goals-react --rm -d -it -p 3000:3000 goals-react
+
+
+
+docker run --name pg -p 5432:5432 -d --rm  -e POSTGRES_PASSWORD=dockerpg  -e POSTGRES_USER=dockerpg  -e POSTGRES_DB=dockerpg  -v pgdata:/var/lib/postgresql/data  postgres
+
+docker exec -it d37121212sas33 psql -U dockerpg dockerpg;
